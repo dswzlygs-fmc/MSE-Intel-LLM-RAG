@@ -1,0 +1,24 @@
+name,description,query,id,parentId,isFolder
+初始化,,,0,,true
+创建关系-Covered,,"MATCH (p:Visit), (v:Payer)
+WHERE p.payer_id= v.payer_id
+CREATE (p)-[:COVERED_BY]->(v)
+RETURN p, v",1,0,false
+创建关系-HAS,,"MATCH (p:Patient), (v:Visit)
+WHERE p.patient_id= v.patient_id
+CREATE (p)-[:HAS]->(v)
+RETURN p, v",2,0,false
+创建关系-AT,,"MATCH (p:Visit), (v:Hospital)
+WHERE p.hospital_id= v.hospital_id
+CREATE (p)-[:AT]->(v)
+RETURN p, v",3,0,false
+创建关系-TREATS,,"MATCH (p:Physician), (v:Visit)
+WHERE p.physician_id= v.physician_id
+ CREATE (p)-[:TREATS]->(v)
+RETURN p, v",4,0,false
+创建关系-Writes,,"MATCH (p:Visit), (v:Review)
+WHERE p.visit_id= v.visit_id
+ CREATE (p)-[:WRITES]->(v)
+RETURN p, v",5,0,false
+创建关系-EMPLOYS,,"MATCH (p:Physician) -[:TREATS]-> (v:Visit) -[:AT]->(h:Hospital) 
+ merge (h)-[:EMPLOYS]->(p)",6,0,false

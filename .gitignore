@@ -1,0 +1,5 @@
+/.venv
+/venv
+/Qwen-7B
+chatglm3-6b/
+bge-base-zh-v1.5/
